@@ -10,9 +10,7 @@ const screenW = 640,
 function init(){
   const canvas = document.getElementById('viewer');
   const context = canvas.getContext('2d');
-  const canvasDataHash = context.getImageData(0, 0, 640, 480);
-  canvasDataHash.data.set(renderData);
-  context.putImageData(canvasDataHash, 0, 0);
+  const canvasDataHash = context.getImageData(0, 0, screenW, screenH);
 
   window.setInterval(gameTick, 10); //100 updates per second
 
@@ -20,6 +18,11 @@ function init(){
     canvasDataHash.data.set(renderData);
     context.putImageData(canvasDataHash, 0, 0);
     window.requestAnimationFrame(drawData);
+    //This supposedly could be faster but doesn't seem to be
+    // createImageBitmap(canvasDataHash, 0, 0, screenW, screenH).then(function(bitmap){
+    //   context.drawImage(bitmap, 0, 0);
+    //   window.requestAnimationFrame(drawData);
+    // });
   })();
 }
 
