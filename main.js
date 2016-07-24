@@ -6,7 +6,6 @@ const screenW = 640,
       renderBuffer = new ArrayBuffer(screenW * screenH * 4),
       renderData = new Uint8ClampedArray(renderBuffer),
       originPixel = renderData.length - 1 - (screenW * 4);
-renderData.fill(200); //Temp gray fill
 
 function init(){
   const canvas = document.getElementById('viewer');
@@ -25,15 +24,16 @@ function init(){
 }
 
 function gameTick(){
+  renderData.fill(200); //Temp gray fill
   drawCharacter();
 }
 
+let x = 20;
 function drawCharacter(){
   //square
-  const //position and size
-    x = 20,
-    y = 0,
+  let  y = 0,
     size = 30;
+  x = ++x > (screenW * 4 - (size * 4)) ? 20 : x;
 
   //draw the square a whole horizontal line at a time
   const upALine = screenW * 4;
